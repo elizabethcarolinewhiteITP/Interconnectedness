@@ -21,7 +21,7 @@ PImage img;
 Movie movie;
 
 int minDepth = 50;
-int maxDepth = 2705;
+int maxDepth = 2695;
 
 //change render mode between openGL and CPU
 int renderMode = 1;
@@ -33,6 +33,7 @@ int  vertLoc;
 
 float scaleVal = 260;
 float increase = 0;
+float rotation;
 
 
 void setup() {
@@ -52,22 +53,35 @@ void setup() {
 
   smooth(16);
 
-  frameRate(24);
+  //frameRate(24);
 }
 
 
 void draw() {
   background(0);
-  increase = increase + 5;
+  if (keyPressed){
+    if(key == ' '){
+  increase = increase + 3;
+    }
+        if(key == 'b'){
+  increase = increase -3;
+    }
+    if(key =='r'){
+      rotation = rotation + 0.001;
+     rotateY(rotation);
+     
+    }
+  }
   // Translate and rotate
   pushMatrix();
   translate(width/2, height/2, 50 + increase);
   //scale(scaleVal, 0, scaleVal+increase);
   rotateY(a);
-  strokeWeight(2);
+ 
+  strokeWeight(3);
 
   // We're just going to calculate and draw every 2nd pixel
-  int skip = 1;
+  //int skip = 0;
 
   // Get the raw depth as array of integers
   int[] depth = kinect2.getRawDepth();
@@ -75,17 +89,22 @@ void draw() {
   stroke(255);
   beginShape(POINTS);
 
-  for (int x = 0; x < kinect2.depthWidth; x+=skip) {
-    for (int y = 0; y < kinect2.depthHeight; y+=skip) {
+  for (int x = 0; x < kinect2.depthWidth; x+=1) {
+    for (int y = 0; y < kinect2.depthHeight; y+=1) {
       int offset = x + y * kinect2.depthWidth;
 
       //calculte the x, y, z camera position based on the depth information
       PVector point = depthToPointCloudPos(x, y, depth[offset]);
 
+//float mapped = map(point.z, 0,1000,1,3);
       if (depth[offset] >= minDepth && depth[offset] <= maxDepth) {
 
         // Draw a point
+        //strokeWeight(mapped);
+        strokeWeight(3);
         vertex(point.x*1.7, point.y*1.7-290, point.z);
+        //println(point.z);
+        //line(point.x, point.y, point.z, point.x, point.y, point.z*3);
 
         //pushMatrix();
         ////color c = movie.pixels[offset];

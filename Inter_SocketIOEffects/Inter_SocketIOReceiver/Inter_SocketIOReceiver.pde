@@ -94,7 +94,10 @@ void draw() {
     //newGraphic.pixels[newi] = pc.pixels[i];
     //newGraphic.image(imgSprite, x*2, y*2, 20, 20);
     newGraphic.fill(pc.pixels[i]);
-    newGraphic.image(img, x*scl, y*scl);
+    //newGraphic.image(img, x*scl, y*scl);
+    newGraphic.stroke(pc.pixels[i]);
+    //newGraphic.point(x*scl, y*scl);
+    newGraphic.rect(x*scl, y*scl, 1, 1);
     //pc.pixels[i] = color(random(255), random(255), random(255));
     //  }
     //////QUESTIONS//////
@@ -111,7 +114,10 @@ void draw() {
   //  image(newpc, 0,0);
   //    image(newpc, width-2000,0);
   newGraphic.endDraw();
-  image(newGraphic, 0, 0);
+  image(newGraphic, 0, 0, width/4, height*2);
+  //image(newGraphic, width/4, 0);
+  //image(newGraphic, width/2, 0);
+  //image(newGraphic, width-width/4, 0);
   //image(changeIMG, 0, 0, 1920, 1080);
 
   //image(pc, 0, 0, 1920, 1080);

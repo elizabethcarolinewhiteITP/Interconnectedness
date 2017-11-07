@@ -25,7 +25,7 @@ Kinect2 kinect2;
 float a = 3.1;
 
 int minDepth = 50;
-int maxDepth = 3005;
+int maxDepth = 1505;
 float turn;
 
 int frames = 45;
@@ -60,7 +60,7 @@ void draw() {
 turn = turn+0.005;
   // Translate and rotate
   pushMatrix();
-  translate(width/2, height/2, -2000);
+  translate(0, height/2+height/4);
   rotateY(3.1);
   //rotateY(turn);
 
@@ -96,7 +96,7 @@ if(frameCount>frames) {
         // Map the depth to grayscale values of 0-255;
         int str = int(round(map(point.z, minDepth, maxDepth, 1, 255))); 
         stroke(str);
-        strokeWeight(4);
+        strokeWeight(3);
         //strokeWeight(str/70);
         // Draw a point
           //stroke(255,255,255,255);
